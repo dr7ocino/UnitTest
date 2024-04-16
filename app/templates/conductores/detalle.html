@@ -1,0 +1,96 @@
+{% extends 'layout.html'%}
+{% block customCSS%}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename ='css\file.css') }}" />
+{% endblock%}
+
+{% block body%}
+{% if (detalle_conductor|length) %}
+<div class="card card-shadow" style="border-radius: 0px !important">
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-12">
+      <h3 class="text-center mt-5 mb-3">
+        <a href="/lista-de-conductores">
+          <i class="bi bi-arrow-left-circle"></i>
+        </a>
+        INFORMACIÓN DEL CONDUCTOR
+      </h3>
+      <hr />
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-10">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="nombre_empleado" class="form-label">
+              <strong>Nombre del empleado</strong>
+            </label>
+            <br />
+            {{ detalle_conductor.nombre}}
+          </div>
+          <div class="col-md-6">
+            <label for="apellido_empleado" class="form-label">
+              <strong>Placa </strong>
+            </label>
+            <br />
+            {{ detalle_conductor.placa}}
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label for="sexo_empleado" class="form-label">
+              <strong>Codigo </strong>
+            </label>
+            <br />
+            {{ detalle_conductor.Codigo}}
+          </div>
+          <div class="col-md-6">
+            <label for="telefono_empleado" class="form-label">
+              <strong>UID </strong>
+            </label>
+            <br />
+            {{ detalle_conductor.uid}}
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label for="email_empleado" class="form-label">
+              <strong>Ultimo proceso realizado </strong>
+            </label>
+            <br />
+            {{ detalle_conductor.Proceso}}
+          </div>
+          <div class="col-md-6">
+            <label for="profesion_empleado" class="form-label">
+              <strong> Ultima salida </strong>
+            </label>
+            <br />
+            {{ detalle_conductor.Fecha_Limite}}
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label for="salario_empleado" class="form-label">
+              <strong> Ultimo TMA registrado </strong>
+            </label>
+            <br />
+            {{ detalle_conductor.TMA}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<h2 class="text-center">
+  No existe el Conductor
+  <hr />
+</h2>
+{% endif %}
+{% endblock%}

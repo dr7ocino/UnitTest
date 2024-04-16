@@ -1,0 +1,101 @@
+{% extends 'layout.html'%}
+
+{% block customCSS %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename ='css/file.css') }}" />
+{% endblock %}
+
+{% block body %}
+<div class="card card-shadow" style="border-radius: 0px !important">
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-12">
+      <h3 class="text-center mt-5 mb-3">REGISTRAR NUEVO CONDUCTOR</h3>
+      <hr />
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-10">
+      <form
+        class="form-horizontal mx-auto"
+        method="POST"
+        action="/form-registrar-empleado"
+        autocomplete="off"
+        enctype="multipart/form-data">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="nombre" class="form-label">
+                Nombre
+              </label>
+              <input
+                type="text"
+                name="nombre"
+                class="form-control"
+                required />
+            </div>
+            <div class="col-md-6">
+              <label for="placa" class="form-label">
+                Placa
+              </label>
+              <input
+                class="form-control"
+                type="text"
+                name="placa"
+                required />
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label for="uid" class="form-label">
+                UID
+              </label>
+              <input
+                class="form-control"
+                id = "uid_input"
+                type="text"
+                name="uid"
+                required />
+                <script>
+                 
+                    const socket = io();
+                    socket.on('connect', () => {
+                        console.log('Connected to server');
+                    });
+                    socket.on('uid_update', function(data){
+                      document.getElementById('uid_input').value = data.uid;
+                    });
+                    socket.on('disconnect', () => {
+                      console.log('Disconnected from server');
+                    });                               
+                    
+                  </script>
+            </div>
+            <div class="col-md-6">
+              <label for="codigo" class="form-label">
+                Código
+              </label>
+              <input
+                class="form-control"
+                type="text"
+                name="codigo"
+                required />
+            </div>
+          </div>
+
+          <div class="mb-3 mt-4 text-center">
+            <button class="btn btn-outline-success"
+             type="submit">
+             Guardar registro
+             <i class="bi bi-floppy"></i>
+            </button>
+  
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

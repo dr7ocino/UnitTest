@@ -1,0 +1,41 @@
+{% for empleado in dataBusqueda %}
+<tr id="empleado_{{ empleado.uid }}">
+  <td>{{ empleado.uid }}</td>
+  <td>{{ empleado.nombre }}</td>
+  <td>{{ empleado.placa }}</td>
+  <td>{{ empleado.Codigo }}</td>
+  <td>
+    <a
+    href="/detalles-conductor/{{ empleado.uid }}"
+    title="Ver envio"
+    type="button"
+    class="btn btn-info btn-sm"
+    data-bs-toggle="tooltip"
+    data-bs-offset="0,4"
+    data-bs-placement="top"
+    data-bs-html="true"
+    title="<span>Ver detalles</span>">
+    <i class="bi bi-eye"></i>
+    Detalles
+  </a>
+  <a
+    href="/editar-conductor/{{empleado.uid}}"
+    class="btn btn-success btn-sm"
+    tooltip="Actualizar Registro">
+    <i class="bi bi-arrow-clockwise"></i>
+    Actualizar
+  </a>
+  <a
+    href="/eliminar-conductor/{{empleado.uid}}"
+    class="btn btn-danger btn-sm"
+    data-bs-toggle="tooltip"
+    data-bs-offset="0,4"
+    data-bs-placement="top"
+    data-bs-html="true">
+    <i class="bi bi-trash3-fill"></i>
+    
+  </a>
+  </td>
+</tr>
+
+{% endfor %}
