@@ -139,3 +139,15 @@ def buscar_empleadoBD(search):
     except Exception as e:
         print(f"Ocurrió un error en def buscarEmpleadoBD: {e}")
         return []
+
+def obtenerInformacionDispositivos():
+    try: 
+        with connectDB() as conexion_mysql:
+            with conexion_mysql.cursor(dictionary=True) as cursor:
+                query = """SELECT mac, ip, ubicacion
+                            FROM Dispositivos"""
+                cursor.execute(query)
+                dispositivos = cursor.fetchall()
+                return dispositivos
+    except Exception as e:
+        print(f"ocurrio un error al obtener los usuarios")

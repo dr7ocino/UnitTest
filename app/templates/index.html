@@ -1,5 +1,32 @@
 {% extends "layout.html" %}
 {% block body %}
 
+<table class="table">
+  <thead>
+    <tr>
+      <th>MAC</th>
+      <th>IP</th>
+      <th>Ubicación</th>
+      <th>Estado</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for dispositivo in device %}
+
+    <tr>
+      <td>{{ dispositivo.mac }}</td>
+      <td>{{ dispositivo.ip}}</td>
+      <td>{{ dispositivo.ubicacion }}</td>
+      <td style="color: {% if dispositivo.status %}green{% else %}red{% endif %}">
+        {% if dispositivo.status %}Activo{% else %}Inactivo{% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
 {% endblock %}
 

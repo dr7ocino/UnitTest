@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, jsonify, flash
 from .controllers.operaciones_conductor import *
+from .controllers.connDispositivos import verificar_conexion
 from app.events import emitir_uid
 main = Blueprint("main", __name__)
 @main.route('/')
@@ -81,3 +82,17 @@ def viewBuscarEmpleadoBD():
         return render_template('conductores/busqueda.html', dataBusqueda=resultadoBusqueda)
     else:
         return jsonify({'fin': 0})
+    
+@main.route('/verificar-conexion', methods=['GET'])
+def conexionDispositivos():
+    estado_dispositivos : list=[]
+    dispositivos = obtenerInformacionDispositivos()
+    for dispositivo in dispositivos:
+        status = verificar_conexion(dispositivo['ip'])
+        dispositivo['status']=status
+        estado_dispositivos.append(dispositivo)
+    print(estado_dispositivos)
+    return render_template('index.html', device=estado_dispositivos)
+
+        
+    

@@ -1,11 +1,13 @@
+from dotenv import load_dotenv
+import os
 import mysql.connector
-
+load_dotenv()
 def connectDB():
     try:
         connection = mysql.connector.connect(
-            host="192.168.31.155",
-            user="carlos",
-            passwd="7603e5efLp@",
+            host=os.getenv("MYSQL_HOST"),
+            user=os.getenv("MYSQL_USER"),
+            passwd=os.getenv("MYSQL_PASSWORD"),
             database="test_RFID",
             charset='utf8mb4',
             collation='utf8mb4_unicode_ci',
@@ -16,3 +18,16 @@ def connectDB():
 
     except mysql.connector.Error as error:
         print(f"No se pudo conectar: {error}")
+
+
+
+
+            
+# host=os.getenv("MYSQL_HOST"),
+# user=os.getenv("MYSQL_USER"),
+# passwd=os.getenv("MYSQL_PASSWORD"),
+# database=os.getenv("MYSQL_DATABASE"),
+# charset='utf8mb4',
+# collation='utf8mb4_unicode_ci',
+# raise_on_warnings=True
+        
